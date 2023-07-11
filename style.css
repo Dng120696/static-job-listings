@@ -31,7 +31,6 @@ html {
 body {
   background-color: var(--Light-Grayish-Cyan);
   position: relative;
-  font-size: 1.4rem;
 }
 body::before {
   content: "";
@@ -71,13 +70,18 @@ hr {
   border: none;
 }
 p,
+li,
+button {
+  font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+}
+p,
 h1 {
   margin-bottom: 1rem;
 }
 ul {
   color: var(--Dark-Grayish-Cyan);
   justify-content: flex-start;
-  gap: 3.5rem;
+  gap: clamp(2rem, 3vw, 3rem);
 }
 ul li:first-child {
   list-style-type: none;
@@ -86,7 +90,6 @@ ul li:first-child {
   width: clamp(30rem, 90%, 100rem);
   margin: 0 auto;
   padding: 13rem 0 5rem 0;
-  overflow-x: hidden;
 }
 .container,
 .main-container {
@@ -191,9 +194,9 @@ section,
   background-color: var(--Desaturated-Dark-Cyan);
 }
 .data-name span:hover:last-child {
-  background-color: var(--Very-Dark-Grayish-Cyan);
+  /* background-color: var(--Very-Dark-Grayish-Cyan); */
   cursor: pointer;
-  transition: 600ms;
+  /* transition: 600ms; */
 }
 .section-2 button:nth-child(4),
 .section-5 button:nth-child(5),
@@ -222,7 +225,7 @@ section {
   transition: all 1s;
 }
 .section--hidden {
-  transform: translate(10rem);
+  transform: translateY(8rem);
   opacity: 0;
   transition: all 1s;
 }
@@ -260,7 +263,14 @@ section {
     align-items: center;
   }
   .left-section {
-    gap: 2.5rem;
+    gap: clamp(1rem, 1.5vw, 2rem);
     align-items: center;
+    justify-content: flex-start;
+  }
+  section {
+    gap: clamp(2rem, 2.5vw, 3rem);
+  }
+  section article {
+    flex: 1;
   }
 }

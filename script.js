@@ -82,6 +82,7 @@ class JobBoard {
 
     this.dataBox.addEventListener("click", (e) => {
       if (e.target.classList.contains("delete-btn")) {
+        console.log("click");
         const { index } = e.target.dataset;
         this.dataStored.splice(index, 1);
         this.renderDataStored(this.dataStored);
@@ -101,8 +102,7 @@ class JobBoard {
 
     const sectionObserver = new IntersectionObserver(secEntry, {
       root: null,
-      threshold: 0.15,
-      rootMargin: `-100px`,
+      threshold: [0, 0.25, 0.5, 0.75, 1],
     });
 
     section.forEach((sec) => sectionObserver.observe(sec));
