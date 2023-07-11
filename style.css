@@ -231,6 +231,15 @@ section {
   opacity: 1;
 }
 @media (min-width: 768px) {
+  section img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  .left-section {
+    gap: 2.5rem;
+  }
   hr {
     display: none;
   }
