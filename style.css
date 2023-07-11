@@ -32,6 +32,7 @@ body {
   background-color: var(--Light-Grayish-Cyan);
   position: relative;
   font-size: 1.4rem;
+  overflow-x: hidden;
 }
 body::before {
   content: "";
@@ -237,9 +238,7 @@ section {
     left: 0;
     width: 100%;
   }
-  .left-section {
-    gap: 2.5rem;
-  }
+
   hr {
     display: none;
   }
@@ -258,6 +257,10 @@ section {
     flex-direction: column;
   }
   .buttons {
+    align-items: center;
+  }
+  .left-section {
+    gap: 2.5rem;
     align-items: center;
   }
 }
