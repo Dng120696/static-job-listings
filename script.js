@@ -14,6 +14,9 @@ class JobBoard {
       .then((data) => {
         this.newData = data;
         this.renderData(this.newData);
+      })
+      .catch((error) => {
+        console.error("Error fetching JSON file:", error);
       });
   }
 
@@ -27,7 +30,7 @@ class JobBoard {
         .join("");
 
       const html = `
-        <section class="section-${el.id} flex flex-col ${
+        <section class="section-${el.id} section--hidden flex flex-col ${
         el.featured && el.new ? "border-green" : ""
       }">
           <article class="left-section flex flex-col">
@@ -85,6 +88,24 @@ class JobBoard {
         this.displayData();
       }
     });
+    const section = document.querySelectorAll(
+      "section:not(.section-1,.section-2)"
+    );
+
+    const secEntry = (entries, observer) => {
+      const [entry] = entries;
+      if (!entry.isIntersecting) return;
+      entry.target.classList.remove("section--hidden");
+      observer.unobserve(entry.target);
+    };
+
+    const sectionObserver = new IntersectionObserver(secEntry, {
+      root: null,
+      threshold: 0.15,
+      rootMargin: `-100px`,
+    });
+
+    section.forEach((sec) => sectionObserver.observe(sec));
   }
 
   renderDataStored(data) {

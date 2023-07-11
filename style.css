@@ -83,7 +83,7 @@ ul li:first-child {
   list-style-type: none;
 }
 .container {
-  width: clamp(30rem, 90%, 120rem);
+  width: clamp(30rem, 90%, 100rem);
   margin: 0 auto;
   padding: 13rem 0 5rem 0;
 }
@@ -215,7 +215,21 @@ section,
 .section-8 button:nth-child(4) {
   order: 5;
 }
-
+section {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 1s;
+}
+.section--hidden {
+  transform: translate(10rem);
+  opacity: 0;
+  transition: all 1s;
+}
+.section-1,
+.section-2 {
+  transform: translate(0);
+  opacity: 1;
+}
 @media (min-width: 768px) {
   hr {
     display: none;
