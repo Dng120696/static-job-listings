@@ -194,9 +194,9 @@ section,
   background-color: var(--Desaturated-Dark-Cyan);
 }
 .data-name span:hover:last-child {
-  /* background-color: var(--Very-Dark-Grayish-Cyan); */
+  background-color: var(--Very-Dark-Grayish-Cyan);
   cursor: pointer;
-  /* transition: 600ms; */
+  transition: 600ms;
 }
 .section-2 button:nth-child(4),
 .section-5 button:nth-child(5),
