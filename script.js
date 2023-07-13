@@ -1,8 +1,14 @@
+"use strict";
+
 class JobBoard {
   constructor() {
     this.mainContainer = document.querySelector(".main-container");
     this.dataBox = document.querySelector(".data-box");
     this.dataBoxStored = document.querySelector(".data-stored-box");
+    this.clear = document.querySelector(".clear-data");
+    this.clear.addEventListener("click", this.clearData.bind(this));
+    this.mainContainer.addEventListener("click", this.selectButton.bind(this));
+    this.dataBox.addEventListener("click", this.deleteDataStorage.bind(this));
     this.dataStored = [];
     this.newData = null;
     this.fetchData();
@@ -21,6 +27,7 @@ class JobBoard {
   }
 
   renderData(data) {
+    console.log(data);
     this.mainContainer.innerHTML = "";
     data.forEach((el) => {
       el.newArr = [el.role, el.level, ...el.tools, ...el.languages];
@@ -67,30 +74,8 @@ class JobBoard {
       this.mainContainer.insertAdjacentHTML("beforeend", html);
     });
 
-    const buttonElements = this.mainContainer.querySelectorAll("button");
-    buttonElements.forEach((button) => {
-      button.addEventListener("click", () => {
-        const buttonText = button.textContent;
-
-        if (!this.dataStored.includes(buttonText)) {
-          this.dataStored.push(buttonText);
-          this.renderDataStored(this.dataStored);
-        }
-        this.displayData();
-      });
-    });
-
-    this.dataBox.addEventListener("click", (e) => {
-      if (e.target.classList.contains("delete-btn")) {
-        console.log("click");
-        const { index } = e.target.dataset;
-        this.dataStored.splice(index, 1);
-        this.renderDataStored(this.dataStored);
-        this.displayData();
-      }
-    });
     const section = document.querySelectorAll(
-      "section:not(.section-1,.section-2)"
+      "section:not(.section-1,.section-2,.section-3)"
     );
 
     const secEntry = (entries, observer) => {
@@ -114,12 +99,32 @@ class JobBoard {
       const stored = `
         <p class="flex data-name">
           <span>${data}</span>
-          <span>   <img src="./images/icon-remove.svg" alt="" class="delete-btn" data-index=${i}>
+          <span class="delete-btn" data-index=${i}>   <img src="./images/icon-remove.svg" alt="" >
           </span>
         </p>
       `;
       this.dataBoxStored.insertAdjacentHTML("beforeend", stored);
     });
+  }
+
+  deleteDataStorage(e) {
+    const el = e.target.closest(".delete-btn");
+    if (!el) return;
+    const { index } = el.dataset;
+    this.dataStored.splice(index, 1);
+    this.renderDataStored(this.dataStored);
+    this.displayData();
+  }
+
+  selectButton(e) {
+    const el = e.target.closest("button");
+    if (!el) return;
+    const buttonTxt = el.textContent;
+    if (!this.dataStored.includes(buttonTxt)) {
+      this.dataStored.push(buttonTxt);
+      this.renderDataStored(this.dataStored);
+    }
+    this.displayData();
   }
 
   displayData() {
@@ -143,6 +148,3 @@ class JobBoard {
 }
 
 const jobBoard = new JobBoard();
-document.querySelector(".clear-data").addEventListener("click", () => {
-  jobBoard.clearData();
-});
