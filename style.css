@@ -229,12 +229,6 @@ section {
   opacity: 0;
   transition: all 1s;
 }
-.section-1,
-.section-2,
-.section-3 {
-  transform: translateY(0);
-  opacity: 1;
-}
 @media (min-width: 768px) {
   section img {
     position: relative;

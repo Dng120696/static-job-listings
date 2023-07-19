@@ -74,20 +74,21 @@ class JobBoard {
       this.mainContainer.insertAdjacentHTML("beforeend", html);
     });
 
-    const section = document.querySelectorAll(
-      "section:not(.section-1,.section-2,.section-3)"
-    );
+    const section = document.querySelectorAll("section");
 
     const secEntry = (entries, observer) => {
-      const [entry] = entries;
-      if (!entry.isIntersecting) return;
-      entry.target.classList.remove("section--hidden");
-      observer.unobserve(entry.target);
+      entries.forEach((entry) => {
+        const { target, isIntersecting } = entry;
+        target.classList.toggle("section--hidden", !isIntersecting);
+        if (isIntersecting) {
+          observer.unobserve(target);
+        }
+      });
     };
 
     const sectionObserver = new IntersectionObserver(secEntry, {
       root: null,
-      threshold: [0, 0.25, 0.5, 0.75, 1],
+      threshold: 0.5,
     });
 
     section.forEach((sec) => sectionObserver.observe(sec));
